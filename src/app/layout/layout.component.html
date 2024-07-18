@@ -1,0 +1,71 @@
+<mat-sidenav-container class="sidenav-container" [hasBackdrop]="true">
+	<mat-sidenav
+		#sidenav
+		class="sidenav"
+		[mode]="(isHandset$ | async) ? 'over' : 'side'"
+		[fixedInViewport]="isHandset$ | async">
+		<mat-nav-list>
+			<!-- TODO: Change routing -->
+			<a mat-list-item [routerLink]="['/']" routerLinkActive="btn-active"
+				>LOGO</a
+			>
+			<a mat-list-item routerLink="/calculator" routerLinkActive="btn-active"
+				>Calculator</a
+			>
+			<a mat-list-item (click)="navigateToGuide()">Reference Guide</a>
+		</mat-nav-list>
+	</mat-sidenav>
+
+	<mat-sidenav-content>
+		<mat-toolbar class="flex justify-between">
+			<div class="flex items-center">
+				<button
+					mat-icon-button
+					*ngIf="isHandset$ | async"
+					(click)="sidenav.toggle()">
+					<mat-icon>menu</mat-icon>
+				</button>
+
+				<!-- TODO: Change logo -->
+				<a mat-button [routerLink]="['/']" routerLinkActive="btn-active"
+					>HOME</a
+				>
+
+				<!-- TODO: Change routing -->
+				<ng-container *ngIf="!(isHandset$ | async)">
+					<a mat-button routerLink="/calculator" routerLinkActive="btn-active"
+						>Calculator</a
+					>
+					<a mat-button (click)="navigateToGuide()">Reference Guide</a>
+				</ng-container>
+			</div>
+
+			<div class="flex items-center">
+				<button
+					mat-icon-button
+					class="example-icon favorite-icon"
+					aria-label="Example icon-button with heart icon">
+					<mat-icon>favorite</mat-icon>
+				</button>
+				<button
+					mat-icon-button
+					class="example-icon"
+					aria-label="Example icon-button with share icon">
+					<mat-icon>share</mat-icon>
+				</button>
+				<mat-slide-toggle
+					#darkModeSwitch
+					[checked]="currentTheme === 'dark'"
+					data-toggle-theme="dark,light"
+					data-act-class="ACTIVECLASS">
+				</mat-slide-toggle>
+			</div>
+		</mat-toolbar>
+
+		<div class="m-16">
+			<div class="mx-auto max-w-[1080px] h-screen">
+				<router-outlet />
+			</div>
+		</div>
+	</mat-sidenav-content>
+</mat-sidenav-container>

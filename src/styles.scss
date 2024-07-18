@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@include mat.core();
+@import '@angular/material/prebuilt-themes/magenta-violet.css';
+
+$theme-light: mat.define-theme(
+	(
+		color: (
+			theme-type: light,
+			primary: mat.$rose-palette,
+			tertiary: mat.$red-palette,
+		),
+		density: (
+			scale: 0,
+		),
+	)
+);
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+[data-theme='light'] {
+	@include mat.all-component-themes($theme-light);
+}
