@@ -74,7 +74,6 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 		if (isPlatformBrowser(this.platformId)) {
 			themeChange();
 		}
-		let aaaa = 'tT';
 	}
 
 	ngAfterViewInit() {
