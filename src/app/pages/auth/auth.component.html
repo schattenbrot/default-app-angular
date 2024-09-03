@@ -1,0 +1,25 @@
+<div class="w-96 m-auto">
+	<h2 class="text-3xl mb-8">{{ isLoginForm ? 'Login' : 'Register' }}</h2>
+	<form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="flex flex-col">
+		<mat-form-field>
+			<mat-label>Email</mat-label>
+			<input matInput type="email" formControlName="email" />
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Password</mat-label>
+			<input matInput type="password" formControlName="password" />
+		</mat-form-field>
+
+		<button mat-flat-button type="submit">
+			{{ isLoginForm ? 'Login' : 'Register' }}
+		</button>
+		<button (click)="toggleForm()" class="cursor-pointer">
+			{{
+				isLoginForm
+					? 'Need an account? Register here.'
+					: 'Already have an account? Login here.'
+			}}
+		</button>
+	</form>
+</div>

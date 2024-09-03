@@ -8,4 +8,15 @@ export default [
 	pluginJs.configs.recommended,
 	...tseslint.configs.recommended,
 	{ ignores: ['node_modules/*', '.angular/', '.vscode/', 'dist/'] },
+	{
+		rules: {
+			'@typescript-eslint/no-unused-vars': [
+				'warn',
+				{
+					varsIgnorePattern: '^_',
+					argsIgnorePattern: '^_',
+				},
+			],
+		},
+	},
 ];

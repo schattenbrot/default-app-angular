@@ -12,16 +12,12 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {
-	RouterLink,
-	RouterLinkActive,
-	RouterOutlet,
-	Routes,
-} from '@angular/router';
-import { routes } from 'app/app.routes';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { navigation } from 'app/navigation/navigation';
 import { Observable, map, shareReplay } from 'rxjs';
 import { themeChange } from 'theme-change';
 
@@ -34,15 +30,16 @@ const MOON = 'M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z';
 	standalone: true,
 	imports: [
 		CommonModule,
+		MatButtonModule,
+		MatSidenavModule,
+		MatIconModule,
+		MatListModule,
+		MatMenuModule,
+		MatSlideToggleModule,
+		MatToolbarModule,
 		RouterLink,
 		RouterLinkActive,
 		RouterOutlet,
-		MatSidenavModule,
-		MatIconModule,
-		MatButtonModule,
-		MatToolbarModule,
-		MatSlideToggleModule,
-		MatListModule,
 	],
 	templateUrl: './layout.component.html',
 	styleUrl: './layout.component.scss',
@@ -52,7 +49,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 		| ElementRef
 		| undefined;
 	currentTheme: 'dark' | 'light' = 'dark';
-	routes: Routes = routes.filter(route => route.data && route.data['title']);
+	navigation = navigation;
 
 	isHandset$: Observable<boolean> = this.breakpointObserver
 		.observe(Breakpoints.Handset)

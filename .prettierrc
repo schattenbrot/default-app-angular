@@ -8,5 +8,15 @@
 	"bracketSpacing": true,
 	"bracketSameLine": true,
 	"arrowParens": "avoid",
-	"singleAttributePerLine": false
+	"singleAttributePerLine": false,
+
+	"overrides": [
+		{
+			"files": "*.json",
+			"options": {
+				"useTabs": false,
+				"tabWidth": 2
+			}
+		}
+	]
 }
