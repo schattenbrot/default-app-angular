@@ -17,7 +17,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 		},
 	});
 
-	// return next(authReq).pipe();
 	return next(authReq).pipe(
 		catchError((err: HttpErrorResponse) => {
 			// Check if it's an authentication error
