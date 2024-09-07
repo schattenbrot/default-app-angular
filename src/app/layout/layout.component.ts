@@ -16,7 +16,13 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import {
+	NavigationEnd,
+	Router,
+	RouterLink,
+	RouterLinkActive,
+	RouterOutlet,
+} from '@angular/router';
 import { navigation } from 'app/navigation/navigation';
 import { Observable, map, shareReplay } from 'rxjs';
 import { themeChange } from 'theme-change';
@@ -50,6 +56,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 		| undefined;
 	currentTheme: 'dark' | 'light' = 'dark';
 	navigation = navigation;
+	private currentRoute: string = '';
 
 	isHandset$: Observable<boolean> = this.breakpointObserver
 		.observe(Breakpoints.Handset)
@@ -59,6 +66,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 		);
 
 	constructor(
+		private router: Router,
 		private breakpointObserver: BreakpointObserver,
 		@Inject(PLATFORM_ID) private platformId: object,
 	) {
@@ -71,6 +79,12 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 		if (isPlatformBrowser(this.platformId)) {
 			themeChange();
 		}
+
+		this.router.events.subscribe(events => {
+			if (events instanceof NavigationEnd) {
+				this.currentRoute = events.urlAfterRedirects;
+			}
+		});
 	}
 
 	ngAfterViewInit() {
@@ -82,6 +96,10 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 				.querySelector('.mdc-switch__icon--off')
 				.firstChild.setAttribute('d', SUN);
 		}
+	}
+
+	isActiveRoute(url: string) {
+		return url === this.currentRoute;
 	}
 
 	navigateToGuide() {

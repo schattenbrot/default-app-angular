@@ -4,9 +4,13 @@
 		class="sidenav"
 		[mode]="(isHandset$ | async) ? 'over' : 'side'"
 		[fixedInViewport]="isHandset$ | async">
-		<mat-nav-list class="!p-4">
+		<mat-nav-list>
 			@for (routing of navigation; track $index) {
-				<a mat-list-item [routerLink]="routing.path">
+				<a
+					mat-list-item
+					[routerLink]="routing.path"
+					class="!rounded-none"
+					[activated]="isActiveRoute(routing.path)">
 					<mat-icon matListItemIcon>{{ routing.icon }}</mat-icon>
 					{{ routing.title }}
 				</a>
@@ -24,11 +28,19 @@
 					<mat-icon>menu</mat-icon>
 				</button>
 
-				<a mat-button [routerLink]="['/']">HOME</a>
+				<a
+					mat-button
+					[routerLink]="['/']"
+					[color]="isActiveRoute('/') ? 'primary' : ''"
+					>HOME</a
+				>
 
 				@if (!(isHandset$ | async)) {
 					@for (routing of navigation; track $index) {
-						<a mat-button [routerLink]="routing.path">
+						<a
+							mat-button
+							[routerLink]="routing.path"
+							[color]="isActiveRoute(routing.path) ? 'primary' : ''">
 							<mat-icon matListItemIcon>{{ routing.icon }}</mat-icon>
 							{{ routing.title }}
 						</a>
