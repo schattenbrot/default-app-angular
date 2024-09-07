@@ -2,10 +2,10 @@ import { Routes } from '@angular/router';
 import { authGuard } from './auth/auth.guard';
 import { AuthUser } from './auth/auth.service';
 import { noAuthGuard } from './auth/no-auth.guard';
+import { authUserResolver } from './layout/auth-user.resolver';
 import { AuthComponent } from './pages/auth/auth.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
-import { authUserResolver } from './resolvers/auth-user.resolver';
 
 export type RouteData = {
 	authUser?: AuthUser;
