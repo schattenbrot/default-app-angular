@@ -1,10 +1,8 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
-# Nix based files
+# Nix setup
 .envrc
 .direnv/
-flake.nix
-flake.lock
 
 # Compiled output
 /dist
