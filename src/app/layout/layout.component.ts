@@ -72,6 +72,12 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 	) {
 		if (isPlatformBrowser(this.platformId)) {
 			this.currentTheme = localStorage.getItem('theme') as 'dark' | 'light';
+			if (!this.currentTheme) {
+				this.currentTheme = window.matchMedia('(prefers-color-scheme: dark)')
+					? 'dark'
+					: 'light';
+				localStorage.setItem('theme', this.currentTheme);
+			}
 		}
 	}
 
